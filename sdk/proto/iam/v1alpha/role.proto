@@ -1,0 +1,28 @@
+// SPDX-License-Identifier: Apache-2.0
+syntax = "proto3";
+package geist.iam.v1alpha;
+
+import "google/protobuf/timestamp.proto";
+
+service RoleService {
+    rpc GetRole(RoleRequest) returns (RoleResponse) {}
+}
+
+message RoleRequest {
+    oneof params {
+        string id = 1;
+        string name = 2;
+    }
+}
+
+message RoleResponse {
+    Role role = 1;
+}
+
+message Role {
+    string id = 1;
+    string name = 2;
+    
+    google.protobuf.Timestamp create_time = 5;
+    google.protobuf.Timestamp update_time = 6;
+}

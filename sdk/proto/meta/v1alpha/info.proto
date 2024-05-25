@@ -1,0 +1,16 @@
+// SPDX-License-Identifier: Apache-2.0
+syntax = "proto3";
+package geist.meta.v1alpha;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+service InfoService {
+    rpc GetInfo(google.protobuf.Empty) returns (InfoResponse) {}
+}
+
+message InfoResponse {
+    string commit = 1;
+    google.protobuf.Timestamp build_time = 2;
+    google.protobuf.Timestamp release_time = 3;
+}
