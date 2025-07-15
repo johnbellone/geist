@@ -1,7 +1,12 @@
 {
-    "recommendations": [
-        "esbenp.prettier-vscode",
-        "bungcip.better-toml",
-        "rust-lang.rust-analyzer"
-    ]
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "bungcip.better-toml",
+    "rust-lang.rust",
+    "rust-lang.rust-analyzer",
+    "tamasfe.even-better-toml",
+    "arrterian.nix-env-selector",
+    "bufbuild.vscode-buf",
+    "bbenoist.nix"
+  ]
 }

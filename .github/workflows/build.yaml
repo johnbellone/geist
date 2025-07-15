@@ -1,0 +1,45 @@
+on:
+  push:
+    paths:
+      - proto/**
+      - src/**
+      - build.rs
+      - buf.yaml
+      - Cargo.toml
+      - Cargo.lock
+  pull_request:
+    branches: [main]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+  pull-requests: write
+env:
+  CARGO_TERM_COLOR: always
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        BUILD_TARGET: [release]
+    outputs:
+      release_tag: ${{ steps.build.outputs.release_tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: bufbuild/buf-action@v1
+        with:
+          push: false
+          token: ${{ secrets.BUF_TOKEN }}
+      - run: |
+          rustup --version
+          cargo build --profile ${{ matrix.BUILD_TARGET }}
+          echo "release_tag=v${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          cargo test --profile ${{ matrix.BUILD_TARGET }}

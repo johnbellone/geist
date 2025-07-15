@@ -1,4 +1,5 @@
-**/target
-.cargo-ok
-.DS_Store
+compose.override.yml
+target
+.data
 .env
+.DS_Store
