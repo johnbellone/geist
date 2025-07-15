@@ -3,7 +3,6 @@ modules:
   - name: buf.build/jbellone/geist
     path: proto
 deps:
-  - buf.build/googleapis/googleapis
   - buf.build/bufbuild/protovalidate
 lint:
   except:

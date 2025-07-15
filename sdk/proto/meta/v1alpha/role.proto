@@ -1,0 +1,35 @@
+// SPDX-License-Identifier: Apache-2.0
+syntax = "proto3";
+package geist.iam.v1alpha;
+
+import "buf/validate/validate.proto";
+import "rpc/pagination.proto";
+import "rpc/visibility.proto";
+import "google/protobuf/timestamp.proto";
+
+service RoleService {
+    rpc GetRole(RoleRequest) returns (RoleResponse) {}
+}
+
+message RoleRequest {
+    oneof params {
+        string uid = 1 [(buf.validate.field).string.uuid = true];
+        string name = 2;
+    }
+    geist.rpc.Pagination page = 3;
+}
+
+message RoleResponse {
+    repeated Role roles = 1;
+    geist.rpc.Pagination page = 2;
+}
+
+message Role {
+    string uid = 1 [(buf.validate.field).string.uuid = true];
+    string name = 2;
+    string description = 3;
+    geist.rpc.Visibility visibility = 4;
+    google.protobuf.Timestamp create_time = 5;
+    google.protobuf.Timestamp update_time = 6;
+    google.protobuf.Timestamp delete_time = 7;
+}

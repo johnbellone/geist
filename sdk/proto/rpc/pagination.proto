@@ -1,0 +1,14 @@
+// SPDX-License-Identifier: Apache-2.0
+syntax = "proto3";
+package geist.rpc;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+message Pagination {
+    uint32 skip = 1;
+    uint32 size = 2;
+    uint32 total = 3;
+    string etag = 4;
+    google.protobuf.Timestamp expire_time = 5;
+}
