@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::ServerResult;
-use geist_sdk::pb::{
+use geist_sdk::geist::meta::v1alpha::{
     user_service_server::UserService, UserRequest, UserResponse,
 };
 use tonic::{Request, Status};

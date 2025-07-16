@@ -2,7 +2,6 @@
 syntax = "proto3";
 package geist.rpc;
 
-import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
 message Pagination {
