@@ -2,22 +2,22 @@
 
 use crate::ServerResult;
 use geist_sdk::geist::meta::v1alpha::{
-    user_service_server::UserService, ListUsersRequest, UserRequest, UserResponse,
+    feed_service_server::FeedService, FeedRequest, FeedResponse, ListFeedsRequest,
 };
 use tonic::{Request, Status};
 
 #[derive(Debug, Default)]
-pub struct UserServer;
+pub struct FeedServer;
 
 #[tonic::async_trait]
-impl UserService for UserServer {
+impl FeedService for FeedServer {
     #[tracing::instrument]
-    async fn get_user(&self, _req: Request<UserRequest>) -> ServerResult<UserResponse> {
+    async fn get_feed(&self, _req: Request<FeedRequest>) -> ServerResult<FeedResponse> {
         Err(Status::unimplemented("rpc not implemented"))
     }
 
     #[tracing::instrument]
-    async fn list_users(&self, _req: Request<ListUsersRequest>) -> ServerResult<UserResponse> {
+    async fn list_feeds(&self, _req: Request<ListFeedsRequest>) -> ServerResult<FeedResponse> {
         Err(Status::unimplemented("rpc not implemented"))
     }
 }

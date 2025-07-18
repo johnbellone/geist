@@ -2,12 +2,13 @@
 
 use geist_server::{
     config::AppConfig,
-    meta::{RoleServer, UserServer},
+    meta::{FeedServer, GroupServer, UserServer},
     tracing_metrics_layer,
 };
 
 use geist_sdk::geist::meta::v1alpha::{
-    role_service_server::RoleServiceServer, user_service_server::UserServiceServer,
+    feed_service_server::FeedServiceServer, group_service_server::GroupServiceServer,
+    user_service_server::UserServiceServer,
 };
 
 use dotenvy::dotenv;
@@ -34,7 +35,7 @@ fn setup_logging(config: &AppConfig) {
         environment = %config.environment,
         log_level = %config.effective_log_level(),
         debug = config.debug,
-        "Starting Geist Server"
+        "Starting Geist server"
     );
 }
 
@@ -82,7 +83,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
         for error in validation_errors {
             eprintln!("  - {}", error);
         }
-        std::process::exit(1);
+        std::process::exit(2);
     }
 
     // Setup logging
@@ -93,16 +94,18 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     if let Err(e) = setup_metrics(config.metrics_address) {
         tracing::error!("Failed to set up metrics: {}", e);
-        std::process::exit(1);
+        std::process::exit(3);
     }
 
     let svc1 = UserServiceServer::new(UserServer::default());
-    let svc2 = RoleServiceServer::new(RoleServer::default());
+    let svc2 = FeedServiceServer::new(FeedServer::default());
+    let svc3 = GroupServiceServer::new(GroupServer::default());
 
     Server::builder()
         .trace_fn(|_| tracing::info_span!("geist-server"))
         .add_service(svc1)
         .add_service(svc2)
+        .add_service(svc3)
         .serve(config.grpc_address)
         .await?;
 

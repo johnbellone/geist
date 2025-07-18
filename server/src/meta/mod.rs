@@ -1,5 +1,7 @@
-mod role;
+mod feed;
+mod group;
 mod user;
 
-pub use role::RoleServer;
+pub use feed::FeedServer;
+pub use group::GroupServer;
 pub use user::UserServer;

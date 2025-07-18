@@ -1,0 +1,58 @@
+// SPDX-License-Identifier: Apache-2.0
+syntax = "proto3";
+package geist.meta.v1alpha;
+
+import "buf/validate/validate.proto";
+import "geist/rpc/pagination.proto";
+import "geist/rpc/visibility.proto";
+import "google/protobuf/timestamp.proto";
+
+// This service is used to manage synchronized feeds for news, social media, etc.
+service FeedService {
+    rpc GetFeed(FeedRequest) returns (FeedResponse) {}
+    rpc ListFeeds(ListFeedsRequest) returns (FeedResponse) {}
+}
+
+// Request to get a feed by `uid or name.
+message FeedRequest {
+    oneof query {
+        string uid = 1 [(buf.validate.field).string.uuid = true];
+        string name = 2;
+    }
+    geist.rpc.Pagination page = 3;
+}
+
+// Response to get feeds.
+message FeedResponse {
+    repeated Feed feeds = 1;
+    geist.rpc.Pagination page = 2;
+}
+
+// Request to list feeds.
+message ListFeedsRequest {
+    geist.rpc.Pagination page = 1;
+}
+
+// Feed is a synchronized feed for news, social media, etc.
+message Feed {
+    enum Type {
+        TYPE_UNSPECIFIED = 0;
+        TYPE_RSS = 1;
+        TYPE_ATOM = 2;
+        TYPE_JSON = 3;
+        TYPE_XML = 4;
+        TYPE_HTML = 5;
+        TYPE_TEXT = 6;
+    }
+
+    string uid = 1 [(buf.validate.field).string.uuid = true];
+    string name = 2;
+    string description = 3;
+    string url = 4;
+    string icon_url = 5;
+    Type type = 6;
+    geist.rpc.Visibility visibility = 7;
+    google.protobuf.Timestamp create_time = 8;
+    google.protobuf.Timestamp update_time = 9;
+    google.protobuf.Timestamp delete_time = 10;
+}

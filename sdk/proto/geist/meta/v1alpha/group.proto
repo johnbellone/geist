@@ -1,0 +1,44 @@
+// SPDX-License-Identifier: Apache-2.0
+syntax = "proto3";
+package geist.meta.v1alpha;
+
+import "buf/validate/validate.proto";
+import "geist/rpc/pagination.proto";
+import "geist/rpc/visibility.proto";
+import "google/protobuf/timestamp.proto";
+
+// This service is used to manage roles for users.
+service GroupService {
+    rpc GetGroup(GroupRequest) returns (GroupResponse) {}
+    rpc ListGroups(ListGroupsRequest) returns (GroupResponse) {}
+}
+
+message GroupRequest {
+    oneof query {
+        string uid = 1 [(buf.validate.field).string.uuid = true];
+        string name = 2;
+    }
+    geist.rpc.Pagination page = 3;
+}
+
+message GroupResponse {
+    repeated Group groups = 1;
+    geist.rpc.Pagination page = 2;
+}
+
+message ListGroupsRequest {
+    geist.rpc.Pagination page = 1;
+}
+
+message Group {
+    string uid = 1 [(buf.validate.field).string.uuid = true];
+    string name = 2;
+    string description = 3;
+    string slug = 4;
+    string icon_url = 5;
+    string url = 6;
+    geist.rpc.Visibility visibility = 7;
+    google.protobuf.Timestamp create_time = 8;
+    google.protobuf.Timestamp update_time = 9;
+    google.protobuf.Timestamp delete_time = 10;
+}

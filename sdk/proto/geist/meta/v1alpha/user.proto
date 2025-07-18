@@ -8,6 +8,7 @@ import "geist/rpc/pagination.proto";
 
 service UserService {
     rpc GetUser(UserRequest) returns (UserResponse) {}
+    rpc ListUsers(ListUsersRequest) returns (UserResponse) {}
 }
 
 message UserRequest {
@@ -24,11 +25,20 @@ message UserResponse {
     geist.rpc.Pagination page = 2;
 }
 
+message ListUsersRequest {
+    geist.rpc.Pagination page = 1;
+}
+
 message User {
     string uid = 1 [(buf.validate.field).string.uuid = true];
     string name = 2;
     string email = 3 [(buf.validate.field).string.email = true];
-    google.protobuf.Timestamp create_time = 5;
-    google.protobuf.Timestamp update_time = 6;
-    google.protobuf.Timestamp delete_time = 7;
+    string username = 4;
+    string avatar_url = 5;
+    string bio = 6;
+    string location = 7;
+    map<string, string> links = 8;
+    google.protobuf.Timestamp create_time = 9;
+    google.protobuf.Timestamp update_time = 10;
+    google.protobuf.Timestamp delete_time = 11;
 }
