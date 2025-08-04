@@ -30,7 +30,7 @@ tokio-stream = { version = "0.1.14", features = ["sync"] }
 tonic = { version = "^0.13", features = ["gzip", "router", "prost"] }
 tonic-health = "^0.13"
 tonic-middleware = "^0.3"
-tonic-reflection = "^0.13"
+tonic-reflection = "^0.14"
 tower = "^0.5"
 tracing = { version = "0.1.37", features = ["async-await", "log", "max_level_debug"] }
 tracing-subscriber = { version = "0.3.16", features = ["tracing", "tracing-serde", "env-filter", "serde", "serde_json"] }
