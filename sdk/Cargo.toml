@@ -17,7 +17,7 @@ jwt = "0.16.0"
 log = "0.4.17"
 prost = "^0.13"
 prost-types = "^0.13"
-tokio = { version = "^1.46", features = ["full", "tracing"] }
+tokio = { version = "^1.47", features = ["full", "tracing"] }
 tokio-stream = "^0.1.15"
 tonic = { version = "^0.13", features = ["gzip", "router", "prost", "codegen"] }
 tracing = { version = "0.1.37", features = ["async-await", "log", "max_level_debug"] }
