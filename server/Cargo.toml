@@ -28,7 +28,7 @@ sqlx = { version = "^0.8", default-features = false, features = ["runtime-tokio"
 tokio = { version = "1.36", features = ["full", "tracing"] }
 tokio-stream = { version = "0.1.14", features = ["sync"] }
 tonic = { version = "^0.13", features = ["gzip", "router", "prost"] }
-tonic-health = "^0.13"
+tonic-health = "^0.14"
 tonic-middleware = "^0.3"
 tonic-reflection = "^0.13"
 tower = "^0.5"
