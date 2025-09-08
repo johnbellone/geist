@@ -25,4 +25,4 @@ tracing-subscriber = { version = "0.3.16", features = ["tracing", "tracing-serde
 uuid = { version = "^1.7", features = ["v7"] }
 
 [build-dependencies]
-tonic-build = "^0.13"
+tonic-build = "^0.14"
