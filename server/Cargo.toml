@@ -29,7 +29,7 @@ tokio = { version = "1.36", features = ["full", "tracing"] }
 tokio-stream = { version = "0.1.14", features = ["sync"] }
 tonic = { version = "^0.14", features = ["gzip", "router"] }
 tonic-health = "^0.14"
-tonic-middleware = "^0.3"
+tonic-middleware = "^0.4"
 tonic-reflection = "^0.14"
 tower = "^0.5"
 tracing = { version = "0.1.37", features = ["async-await", "log", "max_level_debug"] }
