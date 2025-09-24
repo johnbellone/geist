@@ -33,6 +33,10 @@ message ListUsersRequest {
     geist.rpc.Pagination page = 1;
 }
 
+message MutateUserRequest {
+    User user = 1;
+}
+
 message User {
     string uid = 1 [(buf.validate.field).string.uuid = true];
     string name = 2;

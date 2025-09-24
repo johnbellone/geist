@@ -6,12 +6,15 @@ use std::process::{Command, Stdio};
 // generated code does not use the protobuf hierarchy as modules in the code.
 // It would also be very nice if this could be encapsulated in the Tonic crates.
 fn main() -> Result<(), Box<dyn Error>> {
+    println!("cargo::rerun-if-changed=proto");
+    println!("cargo::rerun-if-changed=buf.lock");
     // Export the entire protobuf dependency tree into exploded directories.
     let path = std::path::PathBuf::from(std::env::var("OUT_DIR").unwrap());
     let _ = Command::new("buf")
         .args(["export", "--output", path.to_str().unwrap()])
         .current_dir(env!("CARGO_MANIFEST_DIR"))
-        .spawn()
+        .spawn()?
+        .wait()
         .expect("failed to buf export");
 
     // Get the list of protobufs filenames in the exploded directories.
@@ -32,7 +35,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         .collect::<Vec<&str>>();
 
     // Compile protobufs and generate Rust server and client code (gRPC).
-    tonic_build::configure()
+    tonic_prost_build::configure()
         .build_server(true)
         .build_client(true)
         .build_transport(true)
