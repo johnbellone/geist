@@ -1,5 +1,5 @@
 compose.override.yml
 target
-.data
+data
 .env
 .DS_Store
