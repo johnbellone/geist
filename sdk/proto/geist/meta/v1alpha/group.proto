@@ -11,14 +11,18 @@ import "google/protobuf/timestamp.proto";
 service GroupService {
     rpc GetGroup(GroupRequest) returns (GroupResponse) {}
     rpc ListGroups(ListGroupsRequest) returns (GroupResponse) {}
+    rpc CreateGroup(MutateGroupRequest) returns (GroupResponse) {}
+    rpc UpdateGroup(MutateGroupRequest) returns (GroupResponse) {}
+    rpc DeleteGroup(MutateGroupRequest) returns (GroupResponse) {}
 }
 
 message GroupRequest {
-    oneof query {
+    oneof params {
         string uid = 1 [(buf.validate.field).string.uuid = true];
         string name = 2;
+        string slug = 3;
     }
-    geist.rpc.Pagination page = 3;
+    geist.rpc.Pagination page = 4;
 }
 
 message GroupResponse {
@@ -28,6 +32,10 @@ message GroupResponse {
 
 message ListGroupsRequest {
     geist.rpc.Pagination page = 1;
+}
+
+message MutateGroupRequest {
+    Group group = 1;
 }
 
 message Group {

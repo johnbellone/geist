@@ -11,24 +11,28 @@ import "google/protobuf/timestamp.proto";
 service FeedService {
     rpc GetFeed(FeedRequest) returns (FeedResponse) {}
     rpc ListFeeds(ListFeedsRequest) returns (FeedResponse) {}
+    rpc CreateFeed(MutateFeedRequest) returns (FeedResponse) {}
+    rpc UpdateFeed(MutateFeedRequest) returns (FeedResponse) {}
+    rpc DeleteFeed(MutateFeedRequest) returns (FeedResponse) {}
 }
 
-// Request to get a feed by `uid or name.
 message FeedRequest {
-    oneof query {
+    oneof params {
         string uid = 1 [(buf.validate.field).string.uuid = true];
         string name = 2;
     }
     geist.rpc.Pagination page = 3;
 }
 
-// Response to get feeds.
 message FeedResponse {
     repeated Feed feeds = 1;
     geist.rpc.Pagination page = 2;
 }
 
-// Request to list feeds.
+message MutateFeedRequest {
+    Feed feed = 1;
+}
+
 message ListFeedsRequest {
     geist.rpc.Pagination page = 1;
 }
@@ -41,8 +45,6 @@ message Feed {
         TYPE_ATOM = 2;
         TYPE_JSON = 3;
         TYPE_XML = 4;
-        TYPE_HTML = 5;
-        TYPE_TEXT = 6;
     }
 
     string uid = 1 [(buf.validate.field).string.uuid = true];
