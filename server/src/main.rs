@@ -19,8 +19,8 @@ use tracing_subscriber::prelude::*;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    // Load environment variables from .env file if it exists
     dotenv().ok();
+    color_eyre::install()?;
 
     // Load the service configuration from args or environment variables.
     let config = match AppConfig::load() {

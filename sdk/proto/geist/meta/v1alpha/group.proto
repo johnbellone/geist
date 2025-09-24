@@ -45,8 +45,6 @@ message Group {
     string slug = 4;
     string icon_url = 5;
     string url = 6;
-    geist.rpc.Visibility visibility = 7;
     google.protobuf.Timestamp create_time = 8;
     google.protobuf.Timestamp update_time = 9;
-    google.protobuf.Timestamp delete_time = 10;
 }

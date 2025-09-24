@@ -866,6 +866,7 @@ dependencies = [
  "axum-health",
  "chrono",
  "clap 4.5.48",
+ "color-eyre",
  "dotenvy",
  "geist-sdk",
  "humantime",

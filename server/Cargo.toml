@@ -39,3 +39,4 @@ uuid = { version = "^1.7", features = ["v7"] }
 geist-sdk = { path = "../sdk", version = "0.1.0" }
 axum = "0.8.4"
 axum-health = "0.1.2"
+color-eyre = "0.6.5"

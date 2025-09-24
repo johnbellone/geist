@@ -48,5 +48,4 @@ message User {
     map<string, string> links = 8;
     google.protobuf.Timestamp create_time = 9;
     google.protobuf.Timestamp update_time = 10;
-    google.protobuf.Timestamp delete_time = 11;
 }
