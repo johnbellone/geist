@@ -26,6 +26,6 @@ tracing-subscriber = { version = "0.3.16", features = ["tracing", "tracing-serde
 uuid = { version = "^1.7", features = ["v7"] }
 
 geist-sdk = { path = "../sdk", version = "0.1.0" }
-clap = { version = "4.5.48", default-features = false, features = ["derive", "cargo", "env", "help", "usage", "error-context", "std"] }
+clap = { version = "4.5.49", default-features = false, features = ["derive", "cargo", "env", "help", "usage", "error-context", "std"] }
 color-eyre = "0.6.5"
 dotenvy = { version = "^0.15", features = ["clap"] }
