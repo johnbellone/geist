@@ -33,7 +33,7 @@ tonic-middleware = "^0.3"
 tonic-reflection = "^0.14"
 tower = "^0.5"
 tracing = { version = "0.1.37", features = ["async-await", "log", "max_level_debug"] }
-tracing-subscriber = { version = "0.3.16", features = ["tracing", "tracing-serde", "env-filter", "serde", "serde_json"] }
+tracing-subscriber = { version = "0.3.22", features = ["tracing", "tracing-serde", "env-filter", "serde", "serde_json"] }
 uuid = { version = "^1.7", features = ["v7"] }
 
 geist-sdk = { path = "../sdk", version = "0.1.0" }
