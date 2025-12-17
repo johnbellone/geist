@@ -12,7 +12,7 @@ publish = false
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = { version = "4.5.48", default-features = false, features = ["derive", "cargo", "env", "help", "usage", "error-context", "std"] }
+clap = { version = "4.5.53", default-features = false, features = ["derive", "cargo", "env", "help", "usage", "error-context", "std"] }
 humantime = "2.1.0"
 jwt = "0.16.0"
 log = "0.4.29"

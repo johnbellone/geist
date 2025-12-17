@@ -14,7 +14,7 @@ publish = false
 [dependencies]
 anyhow = "1.0.86"
 chrono = { version = "0.4", features = ["serde"] }
-clap = { version = "4.4.18", default-features = false, features = ["derive", "cargo", "env", "help", "usage", "error-context", "std"] }
+clap = { version = "4.5.53", default-features = false, features = ["derive", "cargo", "env", "help", "usage", "error-context", "std"] }
 dotenvy = { version = "^0.15", features = ["clap"] }
 humantime = "2.1.0"
 jwt = "0.16.0"
