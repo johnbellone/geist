@@ -1,12 +1,19 @@
 {
   "recommendations": [
     "esbenp.prettier-vscode",
-    "bungcip.better-toml",
-    "rust-lang.rust",
     "rust-lang.rust-analyzer",
+    "dustypomerleau.rust-syntax",
     "tamasfe.even-better-toml",
-    "arrterian.nix-env-selector",
     "bufbuild.vscode-buf",
-    "bbenoist.nix"
+    "kangping.protobuf",
+    "codezombiech.gitignore",
+    "hashhar.gitattributes",
+    "editorconfig.editorconfig",
+    "ms-vscode-remote.remote-containers",
+    "jeff-hykin.better-dockerfile-syntax",
+    "ms-vscode-remote.remote-ssh",
+    "ms-vscode-remote.remote-ssh-edit",
+    "ms-azuretools.vscode-containers",
+    "hashicorp.terraform"
   ]
 }

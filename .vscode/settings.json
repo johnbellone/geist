@@ -4,12 +4,10 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "source.fixAll.format": "explicit"
+    "source.fixAll.format": "explicit",
   },
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
   },
-  "nixEnvSelector.suggestion": false,
-  "nixEnvSelector.nixFile": "${workspaceFolder}/default.nix"
 }
