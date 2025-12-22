@@ -22,7 +22,7 @@ tokio = { version = "^1.46", features = ["full", "tracing"] }
 tokio-stream = "^0.1.15"
 tonic = { version = "^0.14", features = ["gzip"] }
 tonic-prost = "0.14.2"
-tracing = { version = "0.1.43", features = ["async-await", "log", "max_level_debug"] }
+tracing = { version = "0.1.44", features = ["async-await", "log", "max_level_debug"] }
 tracing-subscriber = { version = "0.3.16", features = ["tracing", "tracing-serde", "env-filter", "serde", "serde_json"] }
 uuid = { version = "^1.19", features = ["v7"] }
 
