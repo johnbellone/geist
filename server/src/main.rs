@@ -2,18 +2,21 @@
 
 use geist_server::{
     config::AppConfig,
-    meta::{FeedServer, GroupServer, UserServer},
+    meta::{FeedServer, GroupServer, IdentityServer, UserServer},
     tracing_metrics_layer,
 };
 
 use geist_sdk::pb::meta::v1alpha::{
-    feed_service_server::FeedServiceServer, group_service_server::GroupServiceServer,
+    feed_service_server::FeedServiceServer,
+    group_service_server::GroupServiceServer,
+    identity_service_server::IdentityServiceServer,
     user_service_server::UserServiceServer,
 };
 
 use dotenvy::dotenv;
 use metrics_exporter_prometheus::PrometheusBuilder;
 use std::error::Error;
+use std::str::FromStr;
 use tonic::transport::Server;
 use tracing_subscriber::prelude::*;
 
@@ -65,15 +68,39 @@ async fn main() -> Result<(), Box<dyn Error>> {
         .install()
         .map_err(|e| anyhow::anyhow!("Failed to install metrics exporter: {}", e))?;
 
+    // Initialize database connection pool
+    tracing::info!("Connecting to database...");
+    let pool = sqlx::PgPool::connect_with(
+        sqlx::postgres::PgConnectOptions::from_str(&config.database_url)?
+            .log_statements(tracing::log::LevelFilter::Debug)
+            .log_slow_statements(tracing::log::LevelFilter::Warn, std::time::Duration::from_secs(1)),
+    )
+    .await
+    .map_err(|e| anyhow::anyhow!("Failed to connect to database: {}", e))?;
+
+    // Run migrations
+    tracing::info!("Running database migrations...");
+    sqlx::migrate!("./migrations")
+        .run(&pool)
+        .await
+        .map_err(|e| anyhow::anyhow!("Failed to run migrations: {}", e))?;
+
+    tracing::info!("Database migrations completed");
+
+    // Create service instances with database pool
     let svc1 = UserServiceServer::new(UserServer::default());
     let svc2 = FeedServiceServer::new(FeedServer::default());
     let svc3 = GroupServiceServer::new(GroupServer::default());
+    let svc4 = IdentityServiceServer::new(IdentityServer::new(pool.clone()));
+
+    tracing::info!(address = %config.grpc_address, "Starting gRPC server");
 
     Server::builder()
         .trace_fn(|_| tracing::info_span!("geist-server"))
         .add_service(svc1)
         .add_service(svc2)
         .add_service(svc3)
+        .add_service(svc4)
         .serve(config.grpc_address)
         .await?;
 

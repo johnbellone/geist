@@ -5,6 +5,7 @@ package geist.meta.v1alpha;
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 import "geist/rpc/pagination.proto";
+import "geist/meta/v1alpha/identity.proto";
 
 service UserService {
     rpc GetUser(UserRequest) returns (UserResponse) {}
@@ -48,4 +49,7 @@ message User {
     map<string, string> links = 8;
     google.protobuf.Timestamp create_time = 9;
     google.protobuf.Timestamp update_time = 10;
+    // Linked identities (populated on request)
+    repeated Identity identities = 11;
+    Identity primary_identity = 12;
 }

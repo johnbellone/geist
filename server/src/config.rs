@@ -89,6 +89,14 @@ pub struct AppConfig {
         help = "Server request timeout in seconds"
     )]
     pub server_timeout_secs: u64,
+
+    /// Database connection URL
+    #[arg(
+        long,
+        env = "DATABASE_URL",
+        help = "PostgreSQL database connection URL"
+    )]
+    pub database_url: String,
 }
 
 impl AppConfig {
@@ -123,6 +131,10 @@ impl AppConfig {
 
         if self.server_timeout_secs == 0 {
             errors.push("SERVER_TIMEOUT_SECS must be greater than 0".to_string());
+        }
+
+        if self.database_url.is_empty() {
+            errors.push("DATABASE_URL is required".to_string());
         }
 
         match self.environment {
