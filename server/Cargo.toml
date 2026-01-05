@@ -26,7 +26,7 @@ prost-types = "^0.14"
 serde_json = "1.0"
 sqlx = { version = "^0.8", default-features = false, features = ["runtime-tokio", "tls-rustls", "migrate", "postgres", "macros", "uuid", "chrono", "json", "ipnetwork"] }
 tokio = { version = "1.36", features = ["full", "tracing"] }
-tokio-stream = { version = "0.1.14", features = ["sync"] }
+tokio-stream = { version = "0.1.18", features = ["sync"] }
 tonic = { version = "^0.14", features = ["gzip", "router"] }
 tonic-health = "^0.14"
 tonic-middleware = "^0.4"
