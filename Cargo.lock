@@ -2955,9 +2955,9 @@ dependencies = [
 
 [[package]]
 name = "tonic-middleware"
-version = "0.4.0"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bd592855b0a0f96103af076c7523c5c51b75090ee31ff178cc7c024c06ac3566"
+checksum = "28272673571986af2ff4337088c2b7314dc20f45e81c4fe1e75cd78feb619002"
 dependencies = [
  "async-trait",
  "futures-util",
